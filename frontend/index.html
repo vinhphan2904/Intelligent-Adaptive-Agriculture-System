@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greenhouse Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-leaf"></i>
+          <h2>GreenHouse</h2>
+        </div>
+
+        <div class="menu">
+          <p class="menu-title">MAIN MENU</p>
+
+          <a href="#" class="menu-item active">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Tổng quan</span>
+          </a>
+
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-temperature-half"></i>
+            <span>Cảm biến</span>
+          </a>
+
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-brain"></i>
+            <span>AI Analysis</span>
+          </a>
+
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Điều khiển thiết bị</span>
+          </a>
+
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Lịch sử</span>
+          </a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Cài đặt</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Chào mừng đến với <b>Smart GreenHouse</b></p>
+          </div>
+
+          <div class="header-right">
+            <div class="status">
+              <span class="status-dot"></span>
+              System Online
+            </div>
+
+            <div class="avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <section class="content">
+          <!-- Sensor Cards -->
+          <div class="section-heading">
+            <h2>Điện kiện trồng trọt</h2>
+            <span>Dữ liệu cảm biến</span>
+          </div>
+
+          <div class="sensor-grid">
+            <!-- Temperature -->
+            <div class="sensor-card">
+              <div class="sensor-icon temperature">
+                <i class="fa-solid fa-temperature-half"></i>
+              </div>
+              <p>Nhiệt độ</p>
+              <h2>25°C</h2>
+              <span>Normal condition</span>
+            </div>
+
+            <!-- Air Humidity -->
+            <div class="sensor-card">
+              <div class="sensor-icon humidity">
+                <i class="fa-solid fa-droplet"></i>
+              </div>
+              <p>Độ ẩm không khí</p>
+              <h2>65%</h2>
+              <span>Normal condition</span>
+            </div>
+
+            <!-- Soil Moisture -->
+            <div class="sensor-card">
+              <div class="sensor-icon soil">
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+              <p>Độ ẩm đất</p>
+              <h2>70%</h2>
+              <span>Normal condition</span>
+            </div>
+
+            <!-- Light Intensity -->
+            <div class="sensor-card">
+              <div class="sensor-icon light">
+                <i class="fa-solid fa-sun"></i>
+              </div>
+              <p>Cường độ ánh sáng</p>
+              <h2>800 lux</h2>
+              <span>Normal condition</span>
+            </div>
+          </div>
+
+          <!-- Analysis Section -->
+          <div class="analysis-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h2>Điều kiện môi trường</h2>
+              </div>
+
+              <div class="outdoor-info">
+                <div class="weather-item">
+                  <i class="fa-solid fa-temperature-half"></i>
+                  <p>Nhiệt độ</p>
+                  <h2>32°C</h2>
+                </div>
+
+                <div class="weather-item">
+                  <i class="fa-solid fa-droplet"></i>
+                  <p>Độ ẩm</p>
+                  <h2>78%</h2>
+                </div>
+
+                <div class="weather-item last-item">
+                  <i class="fa-solid fa-cloud-sun"></i>
+                  <p>Thời tiết</p>
+                  <h2>Nắng đẹp</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h2>AI Analysis</h2>
+                <i class="fa-solid fa-brain"></i>
+              </div>
+
+              <div class="ai-result">
+                <div class="ai-status">
+                  <i class="fa-solid fa-circle-check"></i>
+                  Cây phát triển tốt
+                </div>
+
+                <p>AI dự đoán điều kiện phát triển của cây</p>
+
+                <div class="confidence">
+                  <span>Độ chính xác</span>
+                  <strong>92%</strong>
+                </div>
+
+                <div class="progress-bar">
+                  <div class="progress" style="width: 92%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Device Control -->
+          <div class="panel device-panel">
+            <div class="panel-header">
+              <h2>Trạng thái hoạt động</h2>
+              <span>Thiết bị </span>
+            </div>
+
+            <div class="device-grid">
+              <!-- LED -->
+              <div class="device">
+                <i class="fa-solid fa-lightbulb"></i>
+                <div>
+                  <h3>Đèn LED</h3>
+                  <p>Hệ thống đèn</p>
+                </div>
+                <div class="running"></div>
+              </div>
+              <!-- Pump -->
+              <div class="device">
+                <i class="fa-solid fa-faucet"></i>
+                <div>
+                  <h3>Máy bơm</h3>
+                  <p>Hệ thống tưới tiêu</p>
+                </div>
+                <div class="running"></div>
+              </div>
+              <!-- Fans -->
+              <div class="device">
+                <i class="fa-solid fa-wind"></i>
+                <div>
+                  <h3>Quạt</h3>
+                  <p>Hệ thống quạt tản nhiệt</p>
+                </div>
+                <div class="running"></div>
+              </div>
+              <!-- Window -->
+              <div class="device">
+                <i class="fa-regular fa-window-maximize"></i>
+                <div>
+                  <h3>Cửa thông gió</h3>
+                  <p>Hệ thống cửa thông gió</p>
+                </div>
+                <div class="running"></div>
+              </div>
+              <!-- Mist -->
+              <div class="device">
+                <i class="fa-solid fa-droplet"></i>
+                <div>
+                  <h3>Phun sương</h3>
+                  <p>Hệ thống phun sương</p>
+                </div>
+                <div class="running"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "intelligent-adaptive-agriculture-system",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "123456"
+  ],
+  "homepage": "https://github.com/vinhphan2904/Intelligent-Adaptive-Agriculture-System#readme",
+  "bugs": {
+    "url": "https://github.com/vinhphan2904/Intelligent-Adaptive-Agriculture-System/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinhphan2904/Intelligent-Adaptive-Agriculture-System.git"
+  },
+  "license": "ISC",
+  "author": "Vinh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
