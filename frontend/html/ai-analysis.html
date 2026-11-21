@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Analysis | GreenHouse</title>
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Page-specific CSS -->
+    <link rel="stylesheet" href="../css/ai-analysis.css" />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-leaf"></i>
+          <h2>GreenHouse</h2>
+        </div>
+
+        <div class="menu">
+          <p class="menu-title">MAIN MENU</p>
+
+          <a href="./index.html" class="menu-item">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Tổng quan</span>
+          </a>
+
+          <a href="./sensor.html" class="menu-item">
+            <i class="fa-solid fa-temperature-half"></i>
+            <span>Cảm biến</span>
+          </a>
+
+          <a href="./ai-analysis.html" class="menu-item active">
+            <i class="fa-solid fa-brain"></i>
+            <span>AI Analysis</span>
+          </a>
+
+          <a href="./devices.html" class="menu-item">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Điều khiển thiết bị</span>
+          </a>
+
+          <a href="./history.html" class="menu-item">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Lịch sử</span>
+          </a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Cài đặt</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div>
+            <h1>AI Analysis</h1>
+            <p>Phân tích và đánh giá quá trình phát triển của cây</p>
+          </div>
+
+          <div class="header-right">
+            <div class="status">
+              <span class="status-dot"></span>
+              System Online
+            </div>
+
+            <div class="avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          </div>
+        </header>
+
+        <!-- AI Analysis Content -->
+        <div class="page-content">
+          <!-- Weekly AI Analysis -->
+          <section class="section">
+            <div class="section-heading">
+              <div>
+                <h2>AI Weekly Analysis</h2>
+                <p>
+                  Đánh giá sự phát triển của cây và đề xuất điều kiện môi
+                  trường.
+                </p>
+              </div>
+            </div>
+
+            <div class="analysis-grid">
+              <!-- Growth Evaluation -->
+              <div class="analysis-card evaluation-card">
+                <div class="card-heading">
+                  <div class="card-icon">
+                    <i class="fa-solid fa-brain"></i>
+                  </div>
+                  <span>Đánh giá sự phát triển</span>
+                </div>
+
+                <h3 id="growth-status">Stable Growth</h3>
+
+                <p id="growth-description">
+                  Plant growth is relatively stable compared with the previous
+                  weekly report.
+                </p>
+
+                <div class="evaluation-info">
+                  <div>
+                    <span>Chiều cao cây</span>
+                    <strong id="latest-height">7 cm</strong>
+                  </div>
+
+                  <div>
+                    <span>Số lượng lá</span>
+                    <strong id="latest-leaves">5</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recommended Conditions -->
+              <div class="analysis-card recommendation-card">
+                <div class="card-heading">
+                  <div class="card-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                  </div>
+                  <span>Đề xuất thông số môi trường</span>
+                </div>
+
+                <div class="target-list">
+                  <div class="target-item">
+                    <div>
+                      <i class="fa-solid fa-temperature-half"></i>
+                      <span>Nhiệt độ</span>
+                    </div>
+                    <strong>--</strong>
+                  </div>
+
+                  <div class="target-item">
+                    <div>
+                      <i class="fa-solid fa-droplet"></i>
+                      <span>Độ ẩm không khí</span>
+                    </div>
+                    <strong>--</strong>
+                  </div>
+
+                  <div class="target-item">
+                    <div>
+                      <i class="fa-solid fa-water"></i>
+                      <span>Độ ẩm đất</span>
+                    </div>
+                    <strong>--</strong>
+                  </div>
+
+                  <div class="target-item">
+                    <div>
+                      <i class="fa-solid fa-sun"></i>
+                      <span>Cường độ ánh sáng</span>
+                    </div>
+                    <strong>--</strong>
+                  </div>
+                </div>
+
+                <p class="recommendation-note">
+                  Chỉ là các mức mục tiêu mang tính minh họa. Mức mục tiêu thực
+                  tế phụ thuộc vào loài cây và giai đoạn sinh trưởng
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Weekly Reports -->
+          <section class="section">
+            <div class="section-heading">
+              <div>
+                <h2>Báo cáo hằng tuần</h2>
+                <p>Cập nhật thông tin phát triển của cây mỗi 7 ngày.</p>
+              </div>
+            </div>
+
+            <div class="report-layout">
+              <!-- Report Form -->
+              <div class="report-form-card">
+                <h3>Thông tin phát triển</h3>
+
+                <form id="report-form">
+                  <div class="form-group">
+                    <label for="report-height"> Chiều cao cây (cm) </label>
+
+                    <input
+                      type="number"
+                      id="report-height"
+                      min="0"
+                      step="0.1"
+                      placeholder="Nhập vào chiều cao cây"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="report-leaves"> Số lượng lá </label>
+
+                    <input
+                      type="number"
+                      id="report-leaves"
+                      min="0"
+                      step="1"
+                      placeholder="Nhấp số lượng lá"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="report-condition"> Trạng thái </label>
+
+                    <select id="report-condition" required>
+                      <option value="Good">Tốt</option>
+                      <option value="Normal">Bình thường</option>
+                      <option value="Poor">Chậm</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="report-notes"> Điểm chú ý </label>
+
+                    <textarea
+                      id="report-notes"
+                      rows="3"
+                      placeholder="Mô tả những thay đổi đáng lưu ý..."
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" class="primary-button">
+                    <i class="fa-solid fa-plus"></i>
+                    Nộp báo cáo
+                  </button>
+                </form>
+              </div>
+
+              <!-- Report History -->
+              <div class="report-history-card">
+                <div class="report-history-heading">
+                  <h3>Lịch sử báo cáo</h3>
+                  <span id="report-count">--reports</span>
+                </div>
+
+                <div id="report-list" class="report-list">
+                  <!-- JavaScript renders reports here -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Growth Progress -->
+          <section class="section">
+            <div class="section-heading">
+              <div>
+                <h2>Quá trình phát triển</h2>
+                <p>Sự phát triển của cây qua các thời điểm.</p>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-heading">
+                <h3>Phát triển hằng tuần</h3>
+                <span class="chart-unit">Chiều cao cây (cm)</span>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="growth-chart"></canvas>
+              </div>
+            </div>
+          </section>
+
+          <!-- Season Comparison -->
+          <section class="section">
+            <div class="section-heading">
+              <div>
+                <h2>So sánh giữa các vụ</h2>
+                <p>So sánh sự phát triển của cây giữa các mùa vụ.</p>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <!-- Comparison Controls -->
+              <div class="comparison-controls">
+                <div class="form-group">
+                  <label for="season-one">Vụ đầu</label>
+
+                  <select id="season-one">
+                    <option value="season1">Vụ 01</option>
+                    <option value="season2">Vụ 02</option>
+                    <option value="season3">Vụ 03</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="season-two">Vụ thứ hai</label>
+
+                  <select id="season-two">
+                    <option value="season2">Vụ 02</option>
+                    <option value="season1">Vụ 01</option>
+                    <option value="season3">Vụ 03</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="comparison-metric">So sánh</label>
+
+                  <select id="comparison-metric">
+                    <option value="height">Chiều cao cây</option>
+                    <option value="leaves">Số lượng lá</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Comparison Chart -->
+              <div class="chart-heading">
+                <h3 id="comparison-title">Plant Height Comparison</h3>
+
+                <span class="chart-unit" id="comparison-unit"> cm </span>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="season-chart"></canvas>
+              </div>
+
+              <!-- AI Insights -->
+              <div class="season-insight">
+                <div class="insight-icon">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+
+                <div>
+                  <h3>Điểm nhấn</h3>
+
+                  <p id="season-insight-text">
+                    Select two seasons to compare their growth.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- JavaScript Module -->
+    <script type="module" src="../js/ai-analysis.js"></script>
+  </body>
+</html>

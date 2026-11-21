@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Devices - Greenhouse Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/devices.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <script type="module" src="../data/sensorData.js"></script>
+    <script type="module" src="../js/devices.js"></script>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-leaf"></i>
+          <h2>GreenHouse</h2>
+        </div>
+
+        <div class="menu">
+          <p class="menu-title">MAIN MENU</p>
+
+          <a href="./index.html" class="menu-item">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Tổng quan</span>
+          </a>
+
+          <a href="./sensor.html" class="menu-item">
+            <i class="fa-solid fa-temperature-half"></i>
+            <span>Cảm biến</span>
+          </a>
+
+          <a href="./ai-analysis.html" class="menu-item">
+            <i class="fa-solid fa-brain"></i>
+            <span>AI Analysis</span>
+          </a>
+
+          <a href="./devices.html" class="menu-item active">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Điều khiển thiết bị</span>
+          </a>
+
+          <a href="./history.html" class="menu-item">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Lịch sử</span>
+          </a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Cài đặt</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- HEADER -->
+        <header class="header">
+          <div>
+            <h1>Device Management</h1>
+            <p>Monitor and manage your greenhouse equipment.</p>
+          </div>
+
+          <div class="header-right">
+            <div class="status">
+              <span class="status-dot"></span>
+              System Online
+            </div>
+        </header>
+
+        <!-- DEVICE OVERVIEW -->
+        <section class="device-overview">
+          <div class="overview-card">
+            <div class="overview-icon green">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+
+            <div>
+              <p>Tổng thiết bị</p>
+              <h2 id="total-devices">0</h2>
+            </div>
+          </div>
+
+          <div class="overview-card">
+            <div class="overview-icon blue">
+              <i class="fa-solid fa-power-off"></i>
+            </div>
+
+            <div>
+              <p>Thiết bị đang hoạt động</p>
+              <h2 id="active-devices">0</h2>
+            </div>
+          </div>
+        </section>
+
+        <!-- DEVICES SECTION -->
+        <section class="devices-section">
+          <div class="section-heading">
+            <div>
+              <h2>Thiết bị hoạt động</h2>
+              <p>Quan sát trạng thái hoạt động của các thiết bị.</p>
+            </div>
+
+            <div class="security-label">
+              <i class="fa-solid fa-shield-halved"></i>
+              Protected Control
+            </div>
+          </div>
+
+          <!-- DEVICE GRID -->
+          <div class="device-grid" id="device-grid">
+            <!-- DEVICE 1: FAN -->
+            <article class="device-card device-fan">
+              <div class="device-top">
+                <div class="device-icon fan">
+                  <i class="fa-solid fa-fan"></i>
+                </div>
+
+                <span class="device-status off">
+                  <span class="status-dot"></span>
+                  Bật
+                </span>
+              </div>
+
+              <div class="device-heading">
+                <h3>Quạt thông gió</h3>
+                <p class="device-description">
+                  Điều khiển không khí bên trong nhà kính.
+                </p>
+              </div>
+
+              <div class="device-info">
+                <span>Device ID</span>
+                <strong>DEV-001</strong>
+              </div>
+
+              <div class="device-info">
+                <span>Location</span>
+                <strong>Greenhouse 01</strong>
+              </div>
+
+              <div class="device-control">
+                <div class="locked-content">
+                  <div class="control-row">
+                    <span>Trạng thái</span>
+                    <span class="fake-toggle on"></span>
+                  </div>
+
+                  <div class="control-row">
+                    <span>Chế độ điều khiển</span>
+                    <strong>Thủ công</strong>
+                  </div>
+
+                  <div class="fake-slider"></div>
+                </div>
+
+                <button type="button" class="unlock-button" data-device="fan">
+                  <i class="fa-solid fa-lock"></i>
+                  Mở khoá điều khiển
+                </button>
+              </div>
+            </article>
+
+            <!-- DEVICE 2: WATER PUMP -->
+            <article class="device-card device-pump">
+              <div class="device-top">
+                <div class="device-icon pump">
+                  <i class="fa-solid fa-droplet"></i>
+                </div>
+
+                <span class="device-status on">
+                  <span class="status-dot"></span>
+                  Bật
+                </span>
+              </div>
+
+              <div class="device-heading">
+                <h3>Máy bơm</h3>
+                <p class="device-description">
+                  Cung cấp nước cho nhà kính.
+                </p>
+              </div>
+
+              <div class="device-info">
+                <span>Device ID</span>
+                <strong>DEV-002</strong>
+              </div>
+
+              <div class="device-info">
+                <span>Location</span>
+                <strong>Hệ thống máy bơm</strong>
+              </div>
+
+              <div class="device-control">
+                <div class="locked-content">
+                  <div class="control-row">
+                    <span>Trạng thái</span>
+                    <span class="fake-toggle off"></span>
+                  </div>
+
+                  <div class="control-row">
+                    <span>Chế độ điều khiển</span>
+                    <strong>Thủ công</strong>
+                  </div>
+
+                  <div class="fake-slider"></div>
+                </div>
+
+                <button type="button" class="unlock-button" data-device="pump">
+                  <i class="fa-solid fa-lock"></i>
+                  Mở khoá điều khiển
+                </button>
+              </div>
+            </article>
+
+            <!-- DEVICE 3: GROW LIGHT -->
+            <article class="device-card device-led">
+              <div class="device-top">
+                <div class="device-icon led">
+                  <i class="fa-solid fa-lightbulb"></i>
+                </div>
+
+                <span class="device-status off">
+                  <span class="status-dot"></span>
+                  OFF
+                </span>
+              </div>
+
+              <div class="device-heading">
+                <h3>Đèn LED</h3>
+                <p class="device-description">
+                  Cung cấp ánh sáng cho nhà kính.
+                </p>
+              </div>
+
+              <div class="device-info">
+                <span>Device ID</span>
+                <strong>DEV-003</strong>
+              </div>
+
+              <div class="device-info">
+                <span>Location</span>
+                <strong>Greenhouse 01</strong>
+              </div>
+
+              <div class="device-control">
+                <div class="locked-content">
+                  <div class="control-row">
+                    <span>Trạng thái</span>
+                    <span class="fake-toggle off"></span>
+                  </div>
+
+                  <div class="control-row">
+                    <span>Chế độ điều khiển</span>
+                    <strong>Thủ công</strong>
+                  </div>
+
+                  <div class="fake-slider"></div>
+                </div>
+
+                <button type="button" class="unlock-button" data-device="light">
+                  <i class="fa-solid fa-lock"></i>
+                  Mở khoá điều khiển
+                </button>
+              </div>
+            </article>
+
+            <!-- DEVICE 4: MISTING -->
+            <article class="device-card device-misting">
+              <div class="device-top">
+                <div class="device-icon humidifier">
+                  <i class="fa-solid fa-cloud"></i>
+                </div>
+
+                <span class="device-status on">
+                  <span class="status-dot"></span>
+                  Bật
+                </span>
+              </div>
+
+              <div class="device-heading">
+                <h3>Phun sương</h3>
+                <p class="device-description">
+                  Duy trì độ ẩm bên trong nhà kính.
+                </p>
+              </div>
+
+              <div class="device-info">
+                <span>Device ID</span>
+                <strong>DEV-004</strong>
+              </div>
+
+              <div class="device-info">
+                <span>Location</span>
+                <strong>Greenhouse 01</strong>
+              </div>
+
+              <div class="device-control">
+                <div class="locked-content">
+                  <div class="control-row">
+                    <span>Trạng thái</span>
+                    <span class="fake-toggle off"></span>
+                  </div>
+
+                  <div class="control-row">
+                    <span>Chế độ điều khiển</span>
+                    <strong>Thủ công</strong>
+                  </div>
+
+                  <div class="fake-slider"></div>
+                </div>
+
+                <button
+                  type="button"
+                  class="unlock-button"
+                  data-device="humidifier"
+                >
+                  <i class="fa-solid fa-lock"></i>
+                  Mở khoá điều khiển
+                </button>
+              </div>
+            </article>
+
+            <!-- DEVICE 5: Window -->
+            <article class="device-card device-window">
+              <div class="device-top">
+                <div class="device-icon window">
+                  <i class="fa-regular fa-window-maximize"></i>
+                </div>
+
+                <span class="device-status off">
+                  <span class="status-dot"></span>
+                  Tắt
+                </span>
+              </div>
+
+              <div class="device-heading">
+                <h3>Cửa thông gió</h3>
+                <p class="device-description">
+                  Duy trì sự môi trường ổn định.
+                </p>
+              </div>
+
+              <div class="device-info">
+                <span>Device ID</span>
+                <strong>DEV-005</strong>
+              </div>
+
+              <div class="device-info">
+                <span>Location</span>
+                <strong>Greenhouse 01</strong>
+              </div>
+
+              <div class="device-control">
+                <div class="locked-content">
+                  <div class="control-row">
+                    <span>Trạng thái</span>
+                    <span class="fake-toggle off"></span>
+                  </div>
+
+                  <div class="control-row">
+                    <span>Chế độ điều khiển</span>
+                    <strong>Thủ công</strong>
+                  </div>
+
+                  <div class="fake-slider"></div>
+                </div>
+
+                <button
+                  type="button"
+                  class="unlock-button"
+                  data-device="heater"
+                >
+                  <i class="fa-solid fa-lock"></i>
+                  Mở khoá điều khiển
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- SECURITY NOTICE -->
+        <section class="security-notice">
+          <div class="notice-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <div class="notice-content">
+            <h3>Bảo vệ hệ thống máy móc</h3>
+
+            <p>
+              Tất cả các thiết bị hiện đang bị khóa. Cần xác thực bằng mật khẩu trước khi thực hiện thay đổi đối với các hoạt động của thiết bị.
+            </p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- PASSWORD MODAL -->
+    <div class="password-overlay" id="password-overlay">
+      <div class="password-modal">
+        <div class="password-modal-header">
+          <div class="password-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <button
+            type="button"
+            class="close-modal"
+            id="close-password"
+            aria-label="Close"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <h2>Security Verification</h2>
+
+        <p>Enter your password to unlock device controls.</p>
+
+        <form id="password-form">
+          <label for="device-password"> Password </label>
+
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="device-password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button
+              type="button"
+              id="toggle-password"
+              aria-label="Show password"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+          <p class="password-error" id="password-error" aria-live="polite"></p>
+
+          <div class="password-actions">
+            <button type="button" class="cancel-button" id="cancel-password">
+              Cancel
+            </button>
+
+            <button type="submit" class="verify-button">
+              <i class="fa-solid fa-lock-open"></i>
+              Verify
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,409 @@
+/* ================================
+   AI ANALYSIS PAGE
+================================ */
+
+.page-content {
+  padding: 28px;
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.section-heading p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.status-badge {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 12px;
+}
+
+.status-badge i {
+  font-size: 7px;
+  margin-right: 5px;
+}
+
+/* ================================
+   WEEKLY ANALYSIS
+================================ */
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.analysis-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.evaluation-card h3 {
+  font-size: 24px;
+  color: var(--green);
+  margin: 0 0 10px;
+}
+
+.evaluation-card > p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.evaluation-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.evaluation-info div {
+  padding: 14px;
+  background: var(--background);
+  border-radius: 9px;
+}
+
+.evaluation-info span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.evaluation-info strong {
+  color: var(--text);
+  font-size: 19px;
+}
+
+.target-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.target-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.target-item div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.target-item i {
+  width: 18px;
+  color: var(--green);
+}
+
+.target-item strong {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.recommendation-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* ================================
+   WEEKLY REPORTS
+================================ */
+
+.report-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 20px;
+}
+
+.report-form-card,
+.report-history-card {
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.report-form-card h3,
+.report-history-card h3 {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.report-form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--green);
+}
+
+.primary-button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.primary-button:hover {
+  filter: brightness(0.95);
+}
+
+.report-history-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-history-heading span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 390px;
+  overflow-y: auto;
+}
+
+.report-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--background);
+  border-radius: 9px;
+}
+
+.report-item h4 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.report-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.report-status {
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* ================================
+   CHARTS
+================================ */
+
+.chart-card {
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.chart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.chart-heading h3 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.chart-unit {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+/* ================================
+   SEASON COMPARISON
+================================ */
+
+.comparison-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.comparison-controls .form-group select {
+  cursor: pointer;
+}
+
+.season-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  margin-top: 24px;
+  background: var(--green-soft);
+  border-radius: 10px;
+}
+
+.insight-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--green);
+  border-radius: 9px;
+}
+
+.season-insight h3 {
+  margin: 0 0 7px;
+  font-size: 14px;
+  color: var(--green-dark);
+}
+
+.season-insight p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .analysis-grid,
+  .report-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-content {
+    padding: 18px;
+  }
+
+  .comparison-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .status-badge {
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growing History</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/history.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script type="module" src="../data/sensorData.js"></script>
+    <script type="module" src="../js/history.js"></script>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-leaf"></i>
+          <h2>GreenHouse</h2>
+        </div>
+
+        <div class="menu">
+          <p class="menu-title">MAIN MENU</p>
+
+          <a href="./index.html" class="menu-item">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Tổng quan</span>
+          </a>
+
+          <a href="./sensor.html" class="menu-item">
+            <i class="fa-solid fa-temperature-half"></i>
+            <span>Cảm biến</span>
+          </a>
+
+          <a href="./ai-analysis.html" class="menu-item">
+            <i class="fa-solid fa-brain"></i>
+            <span>AI Analysis</span>
+          </a>
+
+          <a href="./devices.html" class="menu-item">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Điều khiển thiết bị</span>
+          </a>
+
+          <a href="#" class="menu-item active">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Lịch sử</span>
+          </a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Cài đặt</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="history-page">
+        <header class="header">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Chào mừng đến với <b>Smart GreenHouse</b></p>
+          </div>
+
+          <div class="header-right">
+            <div class="status">
+              <span class="status-dot"></span>
+              System Online
+            </div>
+
+            <div class="avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          </div>
+        </header>
+
+        <!-- FILTERS -->
+        <section class="filter-card">
+          <div class="filter-heading">
+            <div>
+              <h2>Bảng lọc</h2>
+            </div>
+
+            <span class="filter-icon">
+              <i class="fa-solid fa-filter"></i>
+            </span>
+          </div>
+
+          <div class="filter-grid">
+            <div class="form-choose">
+              <div class="form-group">
+                <label for="season-select">Vụ</label>
+
+                <div class="select-wrap">
+                  <i class="fa-solid fa-seedling"></i>
+
+                  <select class="season-select">
+                    <option value="">Chọn vụ</option>
+                    <option value="season-1">01</option>
+                    <option value="season-2">02 (Hiện tại)</option>
+                  </select>
+
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="week-select">Tuần</label>
+
+                <div class="select-wrap">
+                  <i class="fa-regular fa-calendar"></i>
+
+                  <select class="week-select" disabled>
+                    <option value="">Chọn vụ trước</option>
+                  </select>
+
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+
+                <span class="field-hint" id="week-hint">
+                  Chọn vụ mùa trước khi chọn tuần muốn xem.
+                </span>
+              </div>
+            </div>
+            <div class="form-choose">
+              <div class="form-group">
+                <label for="season-select">Vụ</label>
+
+                <div class="select-wrap">
+                  <i class="fa-solid fa-seedling"></i>
+
+                  <select class="season-select">
+                    <option value="">Chọn vụ</option>
+                    <option value="season-1">01</option>
+                    <option value="season-2">02 (Hiện tại)</option>
+                  </select>
+
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="week-select">Tuần</label>
+
+                <div class="select-wrap">
+                  <i class="fa-regular fa-calendar"></i>
+
+                  <select class="week-select" disabled>
+                    <option value="">Chọn vụ trước</option>
+                  </select>
+
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+
+                <span class="field-hint" id="week-hint">
+                  Chọn vụ mùa trước khi chọn tuần muốn xem.
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- HISTORY CONTENT -->
+        <section class="history-content">
+          <!-- EMPTY STATE -->
+          <div class="empty-state" id="empty-state">
+            <div class="empty-icon">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <h2>Chưa chọn tuần để xem</h2>
+
+            <p>Chọn vụ mùa và tuần để xem điều kiện thông số.</p>
+          </div>
+
+          <!-- WEEK CONTENT -->
+          <div class="week-panel" id="week-panel" hidden>
+            <div class="week-header">
+              <div class="week-title">
+                <p class="season-label">Vụ 02</p>
+
+                <h2 class="week-label">Tuần 03</h2>
+
+                <p class="week-date"></p>
+              </div>
+              <div class="arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+              <div class="week-title">
+                <p class="season-label">VỤ 02</p>
+
+                <h2 class="week-label">Tuần 03</h2>
+
+                <p class="week-date"></p>
+              </div>
+            </div>
+
+            <div class="section-heading">
+              <div>
+                <h3>Thông số môi trường</h3>
+              </div>
+              <span class="record-count" id="change-count">No changes</span>
+            </div>
+
+            <div class="parameter-grid" id="parameter-grid"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

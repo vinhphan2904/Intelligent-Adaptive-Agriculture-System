@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sensors | GreenSense</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/sensor.css" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JavaScript modules -->
+    <script type="module" src="../data/sensorData.js"></script>
+    <script type="module" src="../js/sensor.js"></script>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="fa-solid fa-leaf"></i>
+          <h2>GreenHouse</h2>
+        </div>
+
+        <div class="menu">
+          <p class="menu-title">MAIN MENU</p>
+
+          <a href="./index.html" class="menu-item">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Tổng quan</span>
+          </a>
+
+          <a href="#" class="menu-item active">
+            <i class="fa-solid fa-temperature-half"></i>
+            <span>Cảm biến</span>
+          </a>
+
+          <a href="./ai-analysis.html" class="menu-item">
+            <i class="fa-solid fa-brain"></i>
+            <span>AI Analysis</span>
+          </a>
+
+          <a href="./devices.html" class="menu-item">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Điều khiển thiết bị</span>
+          </a>
+
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Lịch sử</span>
+          </a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <a href="#" class="menu-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Cài đặt</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- HEADER -->
+        <header class="header">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Chào mừng đến với <b>Smart GreenHouse</b></p>
+          </div>
+
+          <div class="header-right">
+            <div class="status">
+              <span class="status-dot"></span>
+              System Online
+            </div>
+
+            <div class="avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          </div>
+        </header>
+
+        <section class="content">
+          <!-- SENSOR OVERVIEW -->
+          <div class="section-heading">
+            <h2>Tổng quan</h2>
+            <span>Thông số hiện tại</span>
+          </div>
+
+          <div class="sensor-grid">
+            <!-- Temperature -->
+            <button class="sensor-card selected" data-sensor="temperature">
+              <div class="card-top">
+                <div class="sensor-icon temperature-icon">
+                  <i class="fa-solid fa-temperature-half"></i>
+                </div>
+
+                <span class="status-badge" id="status-temperature">
+                  Bình thường
+                </span>
+              </div>
+
+              <p>Nhiệt độ</p>
+
+              <div class="sensor-value">
+                <strong id="value-temperature">--</strong>
+                <span>°C</span>
+              </div>
+            </button>
+            <!-- Air-humidity -->
+            <button class="sensor-card" data-sensor="humidity">
+              <div class="card-top">
+                <div class="sensor-icon humidity-icon">
+                  <i class="fa-solid fa-droplet"></i>
+                </div>
+
+                <span class="status-badge" id="status-humidity">
+                  Bình thường
+                </span>
+              </div>
+
+              <p>Độ ẩm không khí</p>
+
+              <div class="sensor-value">
+                <strong id="value-air_humidity">--</strong>
+                <span>%</span>
+              </div>
+
+              <!-- soil -->
+            </button>
+
+            <button class="sensor-card" data-sensor="soil">
+              <div class="card-top">
+                <div class="sensor-icon soil-icon">
+                  <i class="fa-solid fa-seedling"></i>
+                </div>
+
+                <span class="status-badge" id="status-soil"> Bình thường </span>
+              </div>
+
+              <p>Độ ẩm đất</p>
+
+              <div class="sensor-value">
+                <strong id="value-soil">--</strong>
+                <span>%</span>
+              </div>
+            </button>
+            <!-- Cường độ ánh sáng -->
+            <button class="sensor-card" data-sensor="light">
+              <div class="card-top">
+                <div class="sensor-icon light-icon">
+                  <i class="fa-solid fa-sun"></i>
+                </div>
+
+                <span class="status-badge" id="status-light">
+                  Bình thường
+                </span>
+              </div>
+
+              <p>Cường độ ánh sáng</p>
+
+              <div class="sensor-value">
+                <strong id="value-light_intensity">--</strong>
+                <span>Lux</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- SENSOR DETAILS -->
+          <div class="details-layout">
+            <div class="panel detail-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="eyebrow">Thông số</span>
+                  <h2 id="detail-name">Nhiệt độ</h2>
+                </div>
+
+                <span class="status-badge" id="detail-status">
+                  Bình thường
+                </span>
+              </div>
+
+              <div class="detail-value">
+                <strong id="detail-value">--</strong>
+                <span id="detail-unit">°C</span>
+              </div>
+
+              <p class="description" id="detail-description">
+                Điều kiện nhiệt độ trong nhà kính
+              </p>
+
+              <div class="statistics">
+                <div class="stat-box">
+                  <span>Tối thiểu</span>
+                  <strong id="detail-min">--</strong>
+                </div>
+
+                <div class="stat-box">
+                  <span>Tối đa</span>
+                  <strong id="detail-max">--</strong>
+                </div>
+
+                <div class="stat-box">
+                  <span>Mục tiêu</span>
+                  <strong id="detail-target">--</strong>
+                </div>
+              </div>
+
+              <div class="sensor-information">
+                <div>
+                  <i class="fa-solid fa-wifi"></i>
+                  <span>Kết nối</span>
+                  <strong id="detail-connection">Online</strong>
+                </div>
+
+                <div>
+                  <i class="fa-solid fa-microchip"></i>
+                  <span id="sensor_id">Cảm biến</span>
+                  <strong id="detail-id">--</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- GROWING CONDITIONS -->
+            <div class="panel condition-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="eyebrow">Môi trường</span>
+                  <h2>Thông số phát triển</h2>
+                </div>
+
+                <i class="fa-solid fa-leaf condition-icon"></i>
+              </div>
+
+              <div class="range-labels">
+                <span>Thấp</span>
+                <span>Mục tiêu</span>
+                <span>Cao</span>
+              </div>
+
+              <div class="range-bar">
+                <div class="range-marker" id="range-marker"></div>
+              </div>
+
+              <div class="condition-result" id="condition-result">
+                <i class="fa-solid fa-check"></i>
+
+                <div>
+                  <strong>Đánh giá</strong>
+                  <p id="evaluation-condition">Dữ liệu hiện tại nằm trong mục tiêu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HISTORY -->
+          <div class="panel history-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="eyebrow">LỊCH SỬ</span>
+                <h2>Xu hướng</h2>
+                <p class="description">Dữ liệu được ghi nhận.</p>
+              </div>
+            </div>
+
+            <div class="chart-grid">
+              <div class="chart-card">
+                <h3>Nhiệt độ</h3>
+                <div class="chart-container">
+                  <canvas id="chart-temperature"></canvas>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <h3>Độ ẩm không khí</h3>
+                <div class="chart-container">
+                  <canvas id="chart-humidity"></canvas>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <h3>Độ ẩm đất</h3>
+                <div class="chart-container">
+                  <canvas id="chart-soil"></canvas>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <h3>Cường độ ánh sáng</h3>
+                <div class="chart-container">
+                  <canvas id="chart-light"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

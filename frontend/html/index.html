@@ -6,7 +6,9 @@
     <title>Greenhouse Dashboard</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script type="module" src="../data/sensorData.js"></script>
+    <script type="module" src="../js/main.js"></script>
     <!-- Icons -->
     <link
       rel="stylesheet"
@@ -31,22 +33,22 @@
             <span>Tổng quan</span>
           </a>
 
-          <a href="#" class="menu-item">
+          <a href="./sensor.html" class="menu-item">
             <i class="fa-solid fa-temperature-half"></i>
             <span>Cảm biến</span>
           </a>
 
-          <a href="#" class="menu-item">
+          <a href="./ai-analysis.html" class="menu-item">
             <i class="fa-solid fa-brain"></i>
             <span>AI Analysis</span>
           </a>
 
-          <a href="#" class="menu-item">
+          <a href="./devices.html" class="menu-item">
             <i class="fa-solid fa-sliders"></i>
             <span>Điều khiển thiết bị</span>
           </a>
 
-          <a href="#" class="menu-item">
+          <a href="./history.html" class="menu-item">
             <i class="fa-solid fa-clock-rotate-left"></i>
             <span>Lịch sử</span>
           </a>
@@ -91,7 +93,7 @@
 
           <div class="sensor-grid">
             <!-- Temperature -->
-            <div class="sensor-card">
+            <div class="sensor-card temperature-sensor">
               <div class="sensor-icon temperature">
                 <i class="fa-solid fa-temperature-half"></i>
               </div>
@@ -101,7 +103,7 @@
             </div>
 
             <!-- Air Humidity -->
-            <div class="sensor-card">
+            <div class="sensor-card humidity-sensor">
               <div class="sensor-icon humidity">
                 <i class="fa-solid fa-droplet"></i>
               </div>
@@ -111,7 +113,7 @@
             </div>
 
             <!-- Soil Moisture -->
-            <div class="sensor-card">
+            <div class="sensor-card soil-sensor">
               <div class="sensor-icon soil">
                 <i class="fa-solid fa-seedling"></i>
               </div>
@@ -121,7 +123,7 @@
             </div>
 
             <!-- Light Intensity -->
-            <div class="sensor-card">
+            <div class="sensor-card light-sensor">
               <div class="sensor-icon light">
                 <i class="fa-solid fa-sun"></i>
               </div>
@@ -139,19 +141,19 @@
               </div>
 
               <div class="outdoor-info">
-                <div class="weather-item">
+                <div class="weather-item temperature-environment">
                   <i class="fa-solid fa-temperature-half"></i>
                   <p>Nhiệt độ</p>
                   <h2>32°C</h2>
                 </div>
 
-                <div class="weather-item">
+                <div class="weather-item humidity-environment">
                   <i class="fa-solid fa-droplet"></i>
                   <p>Độ ẩm</p>
                   <h2>78%</h2>
                 </div>
 
-                <div class="weather-item last-item">
+                <div class="weather-item weather-environment last-item">
                   <i class="fa-solid fa-cloud-sun"></i>
                   <p>Thời tiết</p>
                   <h2>Nắng đẹp</h2>
@@ -194,16 +196,16 @@
 
             <div class="device-grid">
               <!-- LED -->
-              <div class="device">
+              <div class="device led">
                 <i class="fa-solid fa-lightbulb"></i>
                 <div>
                   <h3>Đèn LED</h3>
                   <p>Hệ thống đèn</p>
                 </div>
-                <div class="running"></div>
+                <div class="running on"></div>
               </div>
               <!-- Pump -->
-              <div class="device">
+              <div class="device pump">
                 <i class="fa-solid fa-faucet"></i>
                 <div>
                   <h3>Máy bơm</h3>
@@ -212,7 +214,7 @@
                 <div class="running"></div>
               </div>
               <!-- Fans -->
-              <div class="device">
+              <div class="device fan">
                 <i class="fa-solid fa-wind"></i>
                 <div>
                   <h3>Quạt</h3>
@@ -221,7 +223,7 @@
                 <div class="running"></div>
               </div>
               <!-- Window -->
-              <div class="device">
+              <div class="device window">
                 <i class="fa-regular fa-window-maximize"></i>
                 <div>
                   <h3>Cửa thông gió</h3>
@@ -230,7 +232,7 @@
                 <div class="running"></div>
               </div>
               <!-- Mist -->
-              <div class="device">
+              <div class="device misting">
                 <i class="fa-solid fa-droplet"></i>
                 <div>
                   <h3>Phun sương</h3>
@@ -243,7 +245,5 @@
         </section>
       </main>
     </div>
-
-    <script src="js/app.js"></script>
   </body>
 </html>

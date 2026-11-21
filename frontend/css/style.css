@@ -19,6 +19,16 @@ a {
   color: inherit;
 }
 
+:root {
+  --green-dark: #163c2c;
+  --green: #35b96b;
+  --green-soft: #eaf7ef;
+  --background: #f5f7f6;
+  --text: #26352d;
+  --muted: #829087;
+  --border: #e8eeea;
+}
+
 /* =========================
    2. DASHBOARD LAYOUT
 ========================= */
@@ -39,7 +49,7 @@ a {
 
   display: flex;
   flex-direction: column;
-
+  position: relative;
   padding: 25px 18px;
 }
 
@@ -211,8 +221,12 @@ a {
 
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
   border: 1px solid #edf0ee;
+  transition: scale 0.3s ease;
 }
 
+.sensor-card:hover {
+  scale: 1.1;
+}
 .sensor-card p {
   color: #849189;
   font-size: 13px;
@@ -307,6 +321,11 @@ a {
   border-radius: 12px;
   padding: 20px;
   text-align: center;
+  transition: scale 0.3s ease;
+}
+
+.weather-item:hover {
+  scale: 1.1;
 }
 
 .weather-item i {
@@ -322,7 +341,7 @@ a {
 }
 
 .weather-item h2 {
-  font-size: 24px;
+  font-size: 23px;
 }
 
 /* =========================
@@ -427,16 +446,13 @@ a {
   height: 10px;
   max-width: 25px;
   border-radius: 10px;
-  background-color: #fff0e8;
+  background-color: #d0a5a5;
 }
 
 .device .running.on {
-  background-color: #163c2c;
+  background-color: #17c17a;
 }
 
-.device .running.on {
-  background-color: rgb(192, 93, 93);
-}
 /* =========================
    11. RESPONSIVE
 ========================= */
@@ -495,7 +511,7 @@ a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .sensor-grid {
     grid-template-columns: 1fr;
   }
