@@ -189,6 +189,7 @@ function updateChart() {
     createChart(keys, values.value, timeLabels, chartColors[keys], values.unit);
   });
 }
+updateBadge(sensorData["temperature"]);
 updateSensorCard();
 selectCard();
 updateChart();

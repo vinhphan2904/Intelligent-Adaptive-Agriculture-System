@@ -19,6 +19,8 @@
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="../data/sensorData.js"></script>
+    <script type="module" src="../js/ai-analysis.js"></script>
   </head>
 
   <body>
@@ -142,7 +144,7 @@
                 </div>
 
                 <div class="target-list">
-                  <div class="target-item">
+                  <div class="target-item temperature-target">
                     <div>
                       <i class="fa-solid fa-temperature-half"></i>
                       <span>Nhiệt độ</span>
@@ -150,7 +152,7 @@
                     <strong>--</strong>
                   </div>
 
-                  <div class="target-item">
+                  <div class="target-item humidity-target">
                     <div>
                       <i class="fa-solid fa-droplet"></i>
                       <span>Độ ẩm không khí</span>
@@ -158,7 +160,7 @@
                     <strong>--</strong>
                   </div>
 
-                  <div class="target-item">
+                  <div class="target-item soil-target">
                     <div>
                       <i class="fa-solid fa-water"></i>
                       <span>Độ ẩm đất</span>
@@ -166,7 +168,7 @@
                     <strong>--</strong>
                   </div>
 
-                  <div class="target-item">
+                  <div class="target-item led-target">
                     <div>
                       <i class="fa-solid fa-sun"></i>
                       <span>Cường độ ánh sáng</span>
@@ -174,11 +176,6 @@
                     <strong>--</strong>
                   </div>
                 </div>
-
-                <p class="recommendation-note">
-                  Chỉ là các mức mục tiêu mang tính minh họa. Mức mục tiêu thực
-                  tế phụ thuộc vào loài cây và giai đoạn sinh trưởng
-                </p>
               </div>
             </div>
           </section>
@@ -252,7 +249,7 @@
               </div>
 
               <!-- Report History -->
-              <div class="report-history-card">
+              <div id="report-history-card">
                 <div class="report-history-heading">
                   <h3>Lịch sử báo cáo</h3>
                   <span id="report-count">--reports</span>
@@ -277,7 +274,6 @@
             <div class="chart-card">
               <div class="chart-heading">
                 <h3>Phát triển hằng tuần</h3>
-                <span class="chart-unit">Chiều cao cây (cm)</span>
               </div>
 
               <div class="chart-container">
@@ -295,16 +291,17 @@
               </div>
             </div>
 
-            <div class="chart-card">
+            <div class="chart-card comparison">
               <!-- Comparison Controls -->
               <div class="comparison-controls">
                 <div class="form-group">
                   <label for="season-one">Vụ đầu</label>
 
                   <select id="season-one">
-                    <option value="season1">Vụ 01</option>
-                    <option value="season2">Vụ 02</option>
-                    <option value="season3">Vụ 03</option>
+                    <option value="">Chọn vụ</option>
+                    <option value="1">Vụ 01</option>
+                    <option value="2">Vụ 02</option>
+                    <option value="3">Vụ 03</option>
                   </select>
                 </div>
 
@@ -312,9 +309,10 @@
                   <label for="season-two">Vụ thứ hai</label>
 
                   <select id="season-two">
-                    <option value="season2">Vụ 02</option>
-                    <option value="season1">Vụ 01</option>
-                    <option value="season3">Vụ 03</option>
+                    <option value="">Chọn vụ</option>
+                    <option value="1">Vụ 01</option>
+                    <option value="2">Vụ 02</option>
+                    <option value="3">Vụ 03</option>
                   </select>
                 </div>
 
@@ -322,6 +320,7 @@
                   <label for="comparison-metric">So sánh</label>
 
                   <select id="comparison-metric">
+                    <option value="">Thuộc tính</option>
                     <option value="height">Chiều cao cây</option>
                     <option value="leaves">Số lượng lá</option>
                   </select>
@@ -329,14 +328,24 @@
               </div>
 
               <!-- Comparison Chart -->
-              <div class="chart-heading">
-                <h3 id="comparison-title">Plant Height Comparison</h3>
+              <div class="chart-heading" hidden>
+                <h3 class="comparison-title">Plant Height Comparison</h3>
 
                 <span class="chart-unit" id="comparison-unit"> cm </span>
               </div>
 
-              <div class="chart-container">
+              <div class="chart-container" hidden>
                 <canvas id="season-chart"></canvas>
+              </div>
+              <!-- EMPTY STATE -->
+              <div class="empty-state" id="empty-state">
+                <div class="empty-icon">
+                  <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <h2>Chưa chọn các giá trị để xem</h2>
+
+                <p>Chọn vụ mùa và tuần để xem điều kiện thông số.</p>
               </div>
 
               <!-- AI Insights -->
@@ -349,7 +358,7 @@
                   <h3>Điểm nhấn</h3>
 
                   <p id="season-insight-text">
-                    Select two seasons to compare their growth.
+                    Chọn 2 vụ mùa để so sánh sự phát triển.
                   </p>
                 </div>
               </div>
@@ -360,6 +369,5 @@
     </div>
 
     <!-- JavaScript Module -->
-    <script type="module" src="../js/ai-analysis.js"></script>
   </body>
 </html>

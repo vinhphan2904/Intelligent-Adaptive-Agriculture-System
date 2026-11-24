@@ -1,397 +1,324 @@
-// ======================================
-// SAMPLE DATA
-// ======================================
+import {
+  weeklyReports,
+  environmentRecommendations,
+  averageConditionGrowSeason,
+} from "../data/sensorData.js";
 
-let weeklyReports = [
-  {
-    week: 1,
-    height: 4.2,
-    leaves: 2,
-    condition: "Good",
-    notes: "The plant is developing normally.",
-  },
-  {
-    week: 2,
-    height: 6.5,
-    leaves: 4,
-    condition: "Good",
-    notes: "New leaves have appeared.",
-  },
-  {
-    week: 3,
-    height: 7,
-    leaves: 5,
-    condition: "Normal",
-    notes: "Growth is slightly slower.",
-  },
-];
+const analysis_card = document.querySelector(".analysis-grid");
+const recommendation_card = document.querySelector(".target-list");
+const form_card = document.querySelector("#report-form");
+const report_history_card = document.querySelector("#report-history-card");
+const comparison_card = document.querySelector(".chart-card.comparison");
+const chart_drawing_card = comparison_card
+  .querySelector(".chart-container")
+  .querySelector("#season-chart");
+let currentSeason = 1;
+let currentWeek = 3;
+let dataComparison = [null, null, null];
 
-const seasonData = {
-  season1: {
-    name: "Season 01",
-    height: [4.2, 6.5, 7, 10.5, 14],
-    leaves: [2, 4, 5, 7, 9],
-  },
-
-  season2: {
-    name: "Season 02",
-    height: [5, 7, 9, 12, 16],
-    leaves: [3, 5, 7, 9, 12],
-  },
-
-  season3: {
-    name: "Season 03",
-    height: [3.8, 5.5, 8, 11, 13],
-    leaves: [2, 4, 6, 8, 10],
-  },
-};
-
-// ======================================
-// DOM ELEMENTS
-// ======================================
-
-const reportForm = document.getElementById("report-form");
-const reportList = document.getElementById("report-list");
-const reportCount = document.getElementById("report-count");
-
-const latestHeight = document.getElementById("latest-height");
-const latestLeaves = document.getElementById("latest-leaves");
-
-const growthStatus = document.getElementById("growth-status");
-const growthDescription = document.getElementById("growth-description");
-
-const seasonOne = document.getElementById("season-one");
-const seasonTwo = document.getElementById("season-two");
-const metricSelect = document.getElementById("comparison-metric");
-
-const insightText = document.getElementById("season-insight-text");
-
-// ======================================
-// WEEKLY REPORTS
-// ======================================
-
-function renderReports() {
-  reportList.innerHTML = "";
-
-  weeklyReports.forEach((report) => {
-    const reportItem = document.createElement("div");
-
-    reportItem.className = "report-item";
-
-    const information = document.createElement("div");
-
-    const title = document.createElement("h4");
-    title.textContent = `Week ${String(report.week).padStart(2, "0")}`;
-
-    const description = document.createElement("p");
-    description.textContent = `${report.height} cm · ${report.leaves} leaves · ${report.notes || "No additional notes"}`;
-
-    const status = document.createElement("span");
-    status.className = "report-status";
-    status.textContent = report.condition;
-
-    information.append(title, description);
-    reportItem.append(information, status);
-
-    reportList.appendChild(reportItem);
-  });
-
-  reportCount.textContent = `${weeklyReports.length} reports`;
-}
-
-// ======================================
-// ADD NEW REPORT
-// ======================================
-
-reportForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const height = Number(document.getElementById("report-height").value);
-
-  const leaves = Number(document.getElementById("report-leaves").value);
-
-  const condition = document.getElementById("report-condition").value;
-
-  const notes = document.getElementById("report-notes").value;
-
-  const latestWeek = weeklyReports.length
-    ? Math.max(...weeklyReports.map((report) => report.week))
-    : 0;
-
-  const newReport = {
-    week: latestWeek + 1,
-    height,
-    leaves,
-    condition,
-    notes,
-  };
-
-  weeklyReports.push(newReport);
-
-  renderReports();
-  updateGrowthChart();
-  updateWeeklyAnalysis();
-
-  reportForm.reset();
-});
-
-// ======================================
-// WEEKLY AI ANALYSIS - DEMO LOGIC
-// ======================================
-
-function updateWeeklyAnalysis() {
-  if (weeklyReports.length === 0) {
-    growthStatus.textContent = "No Report";
-    growthDescription.textContent = "Submit a weekly report to begin analysis.";
-    latestHeight.textContent = "--";
-    latestLeaves.textContent = "--";
-    return;
-  }
-
-  const latest = weeklyReports[weeklyReports.length - 1];
-  const previous = weeklyReports[weeklyReports.length - 2];
-
-  latestHeight.textContent = `${latest.height} cm`;
-  latestLeaves.textContent = latest.leaves;
-
-  if (!previous) {
-    growthStatus.textContent = "First Report";
-    growthDescription.textContent =
-      "A previous report is needed to compare plant growth.";
-    return;
-  }
-
-  const heightChange = latest.height - previous.height;
-  const leafChange = latest.leaves - previous.leaves;
-
-  if (latest.condition === "Poor" || heightChange < 0 || leafChange < 0) {
-    growthStatus.textContent = "Needs Attention";
-
-    growthDescription.textContent =
-      "Plant development may need attention. Review recent sensor data and growing conditions.";
-  } else if (heightChange > 0 && leafChange > 0) {
-    growthStatus.textContent = "Good Growth";
-
-    growthDescription.textContent = `Plant height increased by ${heightChange.toFixed(1)} cm and ${leafChange} new leaves were recorded compared with the previous report.`;
-  } else {
-    growthStatus.textContent = "Stable Growth";
-
-    growthDescription.textContent =
-      "Plant development is relatively stable compared with the previous report.";
-  }
-}
-
-// ======================================
-// GROWTH PROGRESS CHART
-// ======================================
-
-const growthCanvas = document.getElementById("growth-chart");
-
-const growthChart = new Chart(growthCanvas, {
+const chart = new Chart(chart_drawing_card, {
   type: "line",
-
   data: {
     labels: [],
     datasets: [
       {
-        label: "Plant Height",
+        label: "",
         data: [],
-        borderColor: "#35b96b",
-        backgroundColor: "rgba(53, 185, 107, 0.12)",
+        borderColor: "blue",
+        backgroundColor: "#0000ff20",
         fill: true,
-        tension: 0.35,
-        pointRadius: 4,
+        tension: 0.4,
+      },
+      {
+        label: "",
+        data: [],
+        borderColor: "green",
+        backgroundColor: "#00ff0020",
+        fill: true,
+        tension: 0.4,
       },
     ],
   },
-
   options: {
     responsive: true,
     maintainAspectRatio: false,
-
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-
-    scales: {
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: "Height (cm)",
-        },
-      },
-    },
-  },
-});
-
-function updateGrowthChart() {
-  growthChart.data.labels = weeklyReports.map(
-    (report) => `Week ${report.week}`,
-  );
-
-  growthChart.data.datasets[0].data = weeklyReports.map(
-    (report) => report.height,
-  );
-
-  growthChart.update();
-}
-
-// ======================================
-// SEASON COMPARISON CHART
-// ======================================
-
-const seasonCanvas = document.getElementById("season-chart");
-
-const seasonChart = new Chart(seasonCanvas, {
-  type: "line",
-
-  data: {
-    labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
-    datasets: [],
-  },
-
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-
     interaction: {
       mode: "index",
       intersect: false,
     },
-
     plugins: {
       legend: {
         position: "top",
       },
     },
-
     scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Plant Age",
-        },
-      },
-
+      x: {},
       y: {
-        beginAtZero: true,
+        beginAtZero: false,
+
         title: {
           display: true,
-          text: "Plant Height (cm)",
+          text: "Giá trị",
         },
       },
     },
   },
 });
+comparison_card.querySelector(".chart-heading").hidden = true;
+comparison_card.querySelector(".chart-container").hidden = true;
+comparison_card.querySelector(".empty-state").hidden = false;
 
-// ======================================
-// UPDATE SEASON COMPARISON
-// ======================================
+form_card.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const reports = {
+    height: Number(form_card.querySelector("#report-height").value),
+    leaves: Number(form_card.querySelector("#report-leaves").value),
+    condition: form_card.querySelector("#report-condition").value,
+    notes: form_card.querySelector("#report-notes").value,
+  };
+  weeklyReports[currentSeason] ??= {};
+  weeklyReports[currentSeason][currentWeek] = reports;
+  currentWeek++;
+  form_card.reset();
+});
 
-function updateSeasonChart() {
-  const firstKey = seasonOne.value;
-  const secondKey = seasonTwo.value;
-  const metric = metricSelect.value;
+function updateGrowEvaluation(status, statusClass, message, height, leaves) {
+  const status_card = analysis_card.querySelector("#growth-status");
+  const description_card = analysis_card.querySelector("#growth-description");
+  const info_card = analysis_card.querySelector(".evaluation-info");
+  status_card.textContent = status;
+  status_card.classList.remove(["good", "normal", "bad"]);
+  status_card.classList.add(statusClass);
+  description_card.textContent = message;
+  info_card.querySelector("#latest-height").textContent = `${height} cm`;
+  info_card.querySelector("#latest-leaves").textContent = leaves;
+}
 
-  const firstSeason = seasonData[firstKey];
-  const secondSeason = seasonData[secondKey];
+function updateGrowRecommendation(weekData) {
+  Object.entries(weekData).forEach(([keys, values], index) => {
+    if (!recommendation_card.querySelector(`.target-item.${keys}-target`))
+      return;
+    const element = recommendation_card.querySelector(
+      `.target-item.${keys}-target`,
+    );
+    element.querySelector("strong").textContent =
+      `${values.value}${values.unit}`;
+  });
+}
 
-  const isHeight = metric === "height";
+function updateGrowWeeklys() {
+  const recomment = environmentRecommendations[currentSeason][currentWeek];
+  const evaluation = weeklyReports[currentSeason][currentWeek];
+  updateGrowRecommendation(recomment);
+  updateGrowEvaluation(
+    evaluation.condition,
+    evaluation.status,
+    evaluation.notes,
+    evaluation.height,
+    evaluation.leaves,
+  );
+}
 
-  const metricName = isHeight ? "Plant Height" : "Number of Leaves";
+function countReports() {
+  return Object.values(weeklyReports).reduce((accumulator, currentValue) => {
+    return accumulator + Object.values(currentValue).length;
+  }, 0);
+}
 
-  const unit = isHeight ? "cm" : "leaves";
+function renderHtmlReport(
+  season,
+  week,
+  height,
+  leaves,
+  status,
+  statusClass,
+  message,
+) {
+  return `
+  <div class ="report-item">
+    <div>
+      <h4>Vụ ${String(season).padStart(2, "0")} Tuần ${String(week.padStart(2, "0"))}</h4>\
+      <p>${height} cm - ${leaves} lá - ${message}</p>
+    </div>
+    <div class="report-status ${statusClass}">${status}</div>
+  </div>
+  `;
+}
 
-  document.getElementById("comparison-title").textContent =
-    `${metricName} Comparison`;
+function createHistoryReport() {
+  let reports = [];
+  Object.entries(weeklyReports)
+    .reverse()
+    .forEach(([keys, values]) => {
+      reports.push(
+        Object.entries(values)
+          .reverse()
+          .map(([week, element]) => {
+            return renderHtmlReport(
+              keys,
+              week,
+              element.height,
+              element.leaves,
+              element.condition,
+              element.status,
+              element.notes,
+            );
+          })
+          .join(""),
+      );
+    });
+  return reports.join("");
+}
 
-  document.getElementById("comparison-unit").textContent = unit;
+function updateHistoryReport() {
+  const countReport_card = report_history_card.querySelector("#report-count");
+  const historyReport_card = report_history_card.querySelector("#report-list");
+  const cnt = countReports();
+  countReport_card.textContent = `${cnt} Báo cáo`;
+  historyReport_card.innerHTML = createHistoryReport();
+}
 
-  if (firstKey === secondKey) {
-    seasonChart.data.datasets = [];
-    seasonChart.update();
+function createLabelWeekly(Season) {
+  const labels = Object.keys(weeklyReports[Season]).map((week) => {
+    return `Tuần ${week}`;
+  });
 
-    insightText.textContent = "Please select two different seasons to compare.";
+  return labels;
+}
 
-    return;
-  }
+function createLabelSeason(Season) {
+  const labels = Object.keys(averageConditionGrowSeason[Season]).map((week) => {
+    return `Tuần ${week}`;
+  });
 
-  seasonChart.data.datasets = [
-    {
-      label: firstSeason.name,
-      data: firstSeason[metric],
-      borderColor: "#35b96b",
-      backgroundColor: "#35b96b",
-      tension: 0.35,
-      pointRadius: 4,
+  return labels;
+}
+function getDataWeekly(Season) {
+  const height = [];
+  const leaves = [];
+  Object.values(weeklyReports[Season]).forEach((week) => {
+    height.push(week.height);
+    leaves.push(week.leaves);
+  });
+  return [height, leaves];
+}
+
+function getDataSeason(Season) {
+  const height = [];
+  const leaves = [];
+  Object.values(averageConditionGrowSeason[Season]).forEach((week) => {
+    height.push(week.height);
+    leaves.push(week.leaves);
+  });
+  return [height, leaves];
+}
+
+function createWeeklyChart() {
+  const element = document.getElementById("growth-chart");
+  const [height, leaves] = getDataWeekly(currentSeason);
+  const elementChart = new Chart(element, {
+    type: "line",
+    data: {
+      labels: createLabelWeekly(currentSeason),
+      datasets: [
+        {
+          label: "Chiều cao (cm)",
+          data: height,
+          borderColor: "blue",
+          tension: 0.4,
+          backgroundColor: "#0000FF20",
+          fill: true,
+        },
+        {
+          label: "Số lá (chiếc)",
+          data: leaves,
+          borderColor: "green",
+          tension: 0.4,
+          backgroundColor: "#00ff0020",
+          fill: true,
+        },
+      ],
     },
-
-    {
-      label: secondSeason.name,
-      data: secondSeason[metric],
-      borderColor: "#5799d5",
-      backgroundColor: "#5799d5",
-      tension: 0.35,
-      pointRadius: 4,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+      plugins: {
+        legend: {
+          position: "top",
+        },
+      },
+      scales: {
+        x: {},
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: "Giá trị",
+          },
+        },
+      },
     },
+  });
+}
+
+function createLabelDataSeason() {
+  const firstSeason = createLabelSeason(dataComparison[0]);
+  const secondSeason = createLabelSeason(dataComparison[1]);
+  return firstSeason.length > secondSeason.length ? firstSeason : secondSeason;
+}
+function createComparisonChart() {
+  const chart_heading_card = comparison_card.querySelector(".chart-heading");
+  const labels = createLabelDataSeason();
+  const attributes = dataComparison[2] == "height" ? 0 : 1;
+  const data = [
+    getDataSeason(dataComparison[0]),
+    getDataSeason(dataComparison[1]),
   ];
+  chart.data.datasets[0].label = `Vụ ${String(dataComparison[0]).padStart(2, "0")}`;
+  chart.data.datasets[1].label = `Vụ ${String(dataComparison[1]).padStart(2, "0")}`;
+  chart.data.datasets[0].data = data[0][attributes];
+  chart.data.datasets[1].data = data[1][attributes];
+  chart.data.labels = labels;
+  comparison_card.querySelector(".chart-heading").hidden = false;
+  comparison_card.querySelector(".chart-container").hidden = false;
+  comparison_card.querySelector(".empty-state").hidden = true;
 
-  seasonChart.options.scales.y.title.text = `${metricName} (${unit})`;
-
-  seasonChart.update();
-
-  updateSeasonInsight(firstSeason, secondSeason, metric);
+  chart.update();
+  const property = dataComparison[2] == "height" ? "chiều cao" : "số lượng lá";
+  const unit = dataComparison[2] == "height" ? "cm" : "";
+  chart_heading_card.querySelector(".comparison-title").textContent =
+    `So sánh ${property} của cây`;
+  chart_heading_card.querySelector(".chart-unit").textContent = unit;
 }
 
-// ======================================
-// SEASON INSIGHTS - DEMO LOGIC
-// ======================================
-
-function updateSeasonInsight(firstSeason, secondSeason, metric) {
-  const firstValues = firstSeason[metric];
-  const secondValues = secondSeason[metric];
-
-  const firstAverage = getAverage(firstValues);
-  const secondAverage = getAverage(secondValues);
-
-  const metricName =
-    metric === "height" ? "average plant height" : "average number of leaves";
-
-  if (secondAverage > firstAverage) {
-    insightText.textContent = `${secondSeason.name} has a higher ${metricName} than ${firstSeason.name} in this sample data.`;
-  } else if (firstAverage > secondAverage) {
-    insightText.textContent = `${firstSeason.name} has a higher ${metricName} than ${secondSeason.name} in this sample data.`;
-  } else {
-    insightText.textContent = `Both seasons have the same ${metricName} in this sample data.`;
-  }
+function getSeasonComparison() {
+  const card = comparison_card.querySelectorAll(".form-group");
+  card.forEach((element, index) => {
+    element.addEventListener("change", (event) => {
+      console.log(event.target.value);
+      if (!event.target.value) {
+        dataComparison[index] = null;
+      } else dataComparison[index] = String(event.target.value);
+      const cnt = dataComparison.filter((data) => {
+        return data != null;
+      }).length;
+      if (cnt == 3) {
+        createComparisonChart();
+      } else {
+        comparison_card.querySelector(".chart-heading").hidden = true;
+        comparison_card.querySelector(".chart-container").hidden = true;
+        comparison_card.querySelector(".empty-state").hidden = false;
+      }
+    });
+  });
 }
 
-// ======================================
-// HELPER
-// ======================================
+updateGrowWeeklys();
+updateHistoryReport();
+createWeeklyChart();
 
-function getAverage(values) {
-  const total = values.reduce((sum, value) => sum + value, 0);
-
-  return total / values.length;
-}
-
-// ======================================
-// EVENT LISTENERS
-// ======================================
-
-seasonOne.addEventListener("change", updateSeasonChart);
-seasonTwo.addEventListener("change", updateSeasonChart);
-metricSelect.addEventListener("change", updateSeasonChart);
-
-// ======================================
-// INITIALIZE
-// ======================================
-
-renderReports();
-updateWeeklyAnalysis();
-updateGrowthChart();
-updateSeasonChart();
+getSeasonComparison();

@@ -79,12 +79,22 @@
   color: var(--green);
 }
 
-.evaluation-card h3 {
+.evaluation-card h3.good {
   font-size: 24px;
   color: var(--green);
   margin: 0 0 10px;
 }
 
+.evaluation-card h3.normal {
+  font-size: 24px;
+  color: #575050;
+  margin: 0 0 10px;
+}
+.evaluation-card h3.bad {
+  font-size: 24px;
+  color: #eb0c0cdf;
+  margin: 0 0 10px;
+}
 .evaluation-card > p {
   font-size: 13px;
   line-height: 1.6;
@@ -147,13 +157,6 @@
   color: var(--text);
 }
 
-.recommendation-note {
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
 /* ================================
    WEEKLY REPORTS
 ================================ */
@@ -165,7 +168,7 @@
 }
 
 .report-form-card,
-.report-history-card {
+#report-history-card {
   padding: 22px;
   background: #fff;
   border: 1px solid var(--border);
@@ -173,7 +176,7 @@
 }
 
 .report-form-card h3,
-.report-history-card h3 {
+#report-history-card h3 {
   font-size: 16px;
   color: var(--text);
   margin: 0 0 20px;
@@ -280,12 +283,34 @@
   line-height: 1.5;
 }
 
-.report-status {
+.report-status.good {
   padding: 5px 9px;
   border-radius: 20px;
   background: var(--green-soft);
   color: var(--green);
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.report-status.normal {
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #e4d7d7;
+  color: #575050;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.report-status {
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: rgba(198, 157, 157, 0.3);
+  color: rgb(217, 48, 48);
+  font-size: 12px;
+  font-weight: 600;
+
   white-space: nowrap;
 }
 
@@ -293,6 +318,9 @@
    CHARTS
 ================================ */
 
+[hidden] {
+  display: none !important;
+}
 .chart-card {
   padding: 22px;
   background: #fff;
@@ -312,11 +340,6 @@
   margin: 0;
   font-size: 15px;
   color: var(--text);
-}
-
-.chart-unit {
-  color: var(--muted);
-  font-size: 12px;
 }
 
 .chart-container {
@@ -374,6 +397,27 @@
   color: var(--text);
 }
 
+/* ================================
+   EMPTY
+================================ */
+
+.empty-state {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #b4a6a6;
+}
+
+.empty-icon {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.empty-state p {
+  margin-top: 10px;
+}
 /* ================================
    RESPONSIVE
 ================================ */
